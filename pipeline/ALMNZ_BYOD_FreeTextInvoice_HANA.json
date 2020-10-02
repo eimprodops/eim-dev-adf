@@ -1,0 +1,904 @@
+{
+	"name": "ALMNZ_BYOD_FreeTextInvoice_HANA",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy_FreeTextInvoiceStaging",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "dbo.SalesInvoiceLineV2Staging"
+					},
+					{
+						"name": "Destination",
+						"value": "\"EIM_EDM\".\"STG_DYN_SALES_LINE_V2\""
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"additionalColumns": [
+							{
+								"name": "CREATED_DT",
+								"value": {
+									"value": "@convertFromUtc(utcnow(),'AUS Eastern Standard Time')",
+									"type": "Expression"
+								}
+							},
+							{
+								"name": "CREATED_BY",
+								"value": {
+									"value": "@pipeline().Pipeline",
+									"type": "Expression"
+								}
+							},
+							{
+								"name": "SOURCE_SYSTEM_CD",
+								"value": "16"
+							}
+						],
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "OdbcSink",
+						"writeBatchSize": 0,
+						"preCopyScript": "TRUNCATE TABLE EIM_EDM.STG_DYN_FREE_TEXT_INVOICE;"
+					},
+					"enableStaging": true,
+					"stagingSettings": {
+						"linkedServiceName": {
+							"referenceName": "AzureBlobStorage_EIM_DEV_DataLake",
+							"type": "LinkedServiceReference"
+						},
+						"path": "staging-eim-dev-sqldw"
+					},
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "FREETEXTNUMBER",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "FREETEXTNUMBER",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "INVOICEDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "INVOICEDATE",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "CUSTOMERACCOUNT",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "CUSTOMERACCOUNT",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "INVOICEACCOUNT",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "INVOICEACCOUNT",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CURRENCYCODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "CURRENCYCODE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DUEDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "DUEDATE",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "LINENUMBER",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "LINENUMBER",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "LEDGERDIMENSIONDISPLAYVALUE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "LEDGERDIMENSIONDISPLAYVALUE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "AMOUNTCUR",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "AMOUNTCUR",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DEFAULTDIMENSIONDISPLAYVALUE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "DEFAULTDIMENSIONDISPLAYVALUE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DIRECTDEBITMANDATEID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "DIRECTDEBITMANDATEID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "NGPCODE",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "NGPCODE",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "POSTPONEDVAT",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "POSTPONEDVAT",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "CFPSCODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "CFPSCODE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ISFINALUSER",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISFINALUSER",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "FISCALOPERATIONPRESENCETYPE",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "FISCALOPERATIONPRESENCETYPE",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ISSERVICEDELIVERYADDRESSBASED",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISSERVICEDELIVERYADDRESSBASED",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "CFOPCODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "CFOPCODE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "FISCALDOCUMENTTYPEID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "FISCALDOCUMENTTYPEID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "FISCALESTABLISHMENTID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "FISCALESTABLISHMENTID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "FISCALDOCUMENTOPERATIONTYPEID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "FISCALDOCUMENTOPERATIONTYPEID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "TRANSPORTATIONDOCUMENTLINEID",
+									"type": "Guid",
+									"physicalType": "uniqueidentifier"
+								},
+								"sink": {
+									"name": "TRANSPORTATIONDOCUMENTLINEID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DEFINITIONGROUP",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "DEFINITIONGROUP",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "EXECUTIONID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "EXECUTIONID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ISSELECTED",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISSELECTED",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "TRANSFERSTATUS",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "TRANSFERSTATUS",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "POSTINGPROFILE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "POSTINGPROFILE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "METHODOFPAYMENT",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "METHODOFPAYMENT",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "TERMSOFPAYMENT",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "TERMSOFPAYMENT",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CASHDISCOUNTCODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "CASHDISCOUNTCODE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CASHDISCOUNTDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "CASHDISCOUNTDATE",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "DOCUMENTDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "DOCUMENTDATE",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "DESCRIPTION",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "DESCRIPTION",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "QUANTITY",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "QUANTITY",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "UNITPRICE",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "UNITPRICE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SALESTAXGROUP",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "SALESTAXGROUP",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SALESTAXITEMGROUP",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "SALESTAXITEMGROUP",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CUSTOMERREFERENCE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "CUSTOMERREFERENCE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CUSTOMERREQUISITION",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "CUSTOMERREQUISITION",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "BILLINGCLASSIFICATION",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "BILLINGCLASSIFICATION",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "BILLINGCODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "BILLINGCODE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "EINVOICEACCOUNTCODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "EINVOICEACCOUNTCODE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "EINVOICEISLINESPECIFIC",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "EINVOICEISLINESPECIFIC",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "GIROTYPE",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "GIROTYPE",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ISLUMPSUMRECOVERYTEXTPRINTED",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISLUMPSUMRECOVERYTEXTPRINTED",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "PROPERTYNUMBER",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PROPERTYNUMBER",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "INCLTAX",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "INCLTAX",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "DELIVERYDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "DELIVERYDATE",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "DISCOUNTPERCENTAGE",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "DISCOUNTPERCENTAGE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CUSTOMERPAYMENTFINECODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "CUSTOMERPAYMENTFINECODE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CUSTOMERPAYMENTFINANCIALINTERESTCODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "CUSTOMERPAYMENTFINANCIALINTERESTCODE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "COMPLEMENTARYFISCALDOCUMENTTYPE",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "COMPLEMENTARYFISCALDOCUMENTTYPE",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "CONSIGNEEACCOUNT",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "CONSIGNEEACCOUNT",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CONSIGNORACCOUNT",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "CONSIGNORACCOUNT",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ISCORRECTION",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISCORRECTION",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "CORRECTEDFACTUREDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "CORRECTEDFACTUREDATE",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "CORRECTEDFACTUREEXTERNALID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "CORRECTEDFACTUREEXTERNALID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CORRECTEDINVOICEDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "CORRECTEDINVOICEDATE",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "CORRECTEDINVOICEID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "CORRECTEDINVOICEID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CORRECTEDPERIOD",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "CORRECTEDPERIOD",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "CORRECTIONTYPE",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "CORRECTIONTYPE",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "VATONPAYMENT",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "VATONPAYMENT",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "NONREALREVENUE",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "NONREALREVENUE",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "PARTITION",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PARTITION_COL",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "HEADERDEFAULTDIMENSIONDISPLAYVALUE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "HEADERDEFAULTDIMENSIONDISPLAYVALUE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DATEOFVATREGISTER",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "DATEOFVATREGISTER",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "SALESDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "SALESDATE",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "INTENTLETTERID_IT",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "INTENTLETTERID_IT",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DATAAREAID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "DATAAREAID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SYNCSTARTDATETIME",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "SYNCSTARTTIMESTAMP",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "RECID",
+									"type": "Int64",
+									"physicalType": "bigint"
+								},
+								"sink": {
+									"name": "RECID",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "CREATED_DT"
+								},
+								"sink": {
+									"name": "CREATED_DT",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "CREATED_BY"
+								},
+								"sink": {
+									"name": "CREATED_BY",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SOURCE_SYSTEM_CD"
+								},
+								"sink": {
+									"name": "SOURCE_SYSTEM_CD",
+									"type": "Int32"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "AZURE_SQL_FreeTextInvoiceStaging",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "HANA_ODBC_STG_DYN_FREE_TEXT_INVOICE",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "EIM_Pipelines"
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-09-30T06:40:07Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

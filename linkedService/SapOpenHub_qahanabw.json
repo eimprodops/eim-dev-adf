@@ -1,0 +1,19 @@
+{
+	"name": "SapOpenHub_qahanabw",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SapOpenHub",
+		"typeProperties": {
+			"server": "172.17.192.5",
+			"systemNumber": "00",
+			"clientId": "400",
+			"userName": "singhro",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIzMzMzNzJiYy1jNGJhLTQyZWEtYjRjZi1jNjU5OWJkNzM4YjkiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "EIMDEVintegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

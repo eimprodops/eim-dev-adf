@@ -1,0 +1,2587 @@
+{
+	"name": "ALMNZ_BYOD_EcoResReleasedProductV2_HANA",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy_EcoResReleasedProductV2Staging",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "dbo.SalesInvoiceLineV2Staging"
+					},
+					{
+						"name": "Destination",
+						"value": "\"EIM_EDM\".\"STG_DYN_SALES_LINE_V2\""
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"additionalColumns": [
+							{
+								"name": "CREATED_DT",
+								"value": {
+									"value": "@convertFromUtc(utcnow(),'AUS Eastern Standard Time')",
+									"type": "Expression"
+								}
+							},
+							{
+								"name": "CREATED_BY",
+								"value": {
+									"value": "@pipeline().Pipeline",
+									"type": "Expression"
+								}
+							},
+							{
+								"name": "SOURCE_SYSTEM_CD",
+								"value": "16"
+							}
+						],
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "OdbcSink",
+						"writeBatchSize": 0,
+						"preCopyScript": "TRUNCATE TABLE EIM_EDM.STG_DYN_RELEASED_PRODUCT_V2;"
+					},
+					"enableStaging": true,
+					"stagingSettings": {
+						"linkedServiceName": {
+							"referenceName": "AzureBlobStorage_EIM_DEV_DataLake",
+							"type": "LinkedServiceReference"
+						},
+						"path": "staging-eim-dev-sqldw"
+					},
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "PRODUCTSUBTYPE",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "PRODUCTSUBTYPE",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "DEFAULTLEDGERDIMENSIONDISPLAYVALUE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "DEFAULTLEDGERDIMENSIONDISPLAYVALUE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ARETRANSPORTATIONMANAGEMENTPROCESSESENABLED",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ARETRANSPORTATIONMANAGEMENTPROCESSESENABLED",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "PACKAGEHANDLINGTIME",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "PACKAGEHANDLINGTIME",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "COSTCHARGESQUANTITY",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "COSTCHARGESQUANTITY",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SALESCHARGESQUANTITY",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "SALESCHARGESQUANTITY",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PURCHASECHARGESQUANTITY",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "PURCHASECHARGESQUANTITY",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PKWIUCODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PKWIUCODE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "EXEMPT",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "EXEMPT",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "CUSTOMSIMPORTTARIFFCODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "CUSTOMSIMPORTTARIFFCODE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CUSTOMSEXPORTTARIFFCODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "CUSTOMSEXPORTTARIFFCODE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DEFINITIONGROUP",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "DEFINITIONGROUP",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "EXECUTIONID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "EXECUTIONID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ISSELECTED",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISSELECTED",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "TRANSFERSTATUS",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "TRANSFERSTATUS",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCTTYPE",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "PRODUCTTYPE",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCTNUMBER",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PRODUCTNUMBER",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCTSEARCHNAME",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PRODUCTSEARCHNAME",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ITEMNUMBER",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ITEMNUMBER",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SEARCHNAME",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "SEARCHNAME",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCTGROUPID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PRODUCTGROUPID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ITEMMODELGROUPID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ITEMMODELGROUPID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "STORAGEDIMENSIONGROUPNAME",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "STORAGEDIMENSIONGROUPNAME",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "TRACKINGDIMENSIONGROUPNAME",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "TRACKINGDIMENSIONGROUPNAME",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "INVENTORYRESERVATIONHIERARCHYNAME",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "INVENTORYRESERVATIONHIERARCHYNAME",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DEFAULTORDERTYPE",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "DEFAULTORDERTYPE",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "MARGINABCCODE",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "MARGINABCCODE",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "REVENUEABCCODE",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "REVENUEABCCODE",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "CARRYINGCOSTABCCODE",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "CARRYINGCOSTABCCODE",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "VALUEABCCODE",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "VALUEABCCODE",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ALTERNATIVEPRODUCTUSAGECONDITION",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ALTERNATIVEPRODUCTUSAGECONDITION",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ALTERNATIVEPRODUCTCONFIGURATIONID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ALTERNATIVEPRODUCTCONFIGURATIONID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ALTERNATIVEPRODUCTCOLORID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ALTERNATIVEPRODUCTCOLORID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ALTERNATIVEPRODUCTSIZEID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ALTERNATIVEPRODUCTSIZEID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ALTERNATIVEPRODUCTSTYLEID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ALTERNATIVEPRODUCTSTYLEID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ALTERNATIVEITEMNUMBER",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ALTERNATIVEITEMNUMBER",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "WILLINVENTORYISSUEAUTOMATICALLYREPORTASFINISHED",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "WILLINVENTORYISSUEAUTOMATICALLYREPORTASFINISHED",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "BATCHMERGEDATECALCULATIONMETHOD",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "BATCHMERGEDATECALCULATIONMETHOD",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "BATCHNUMBERGROUPCODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "BATCHNUMBERGROUPCODE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "COSTCALCULATIONGROUPID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "COSTCALCULATIONGROUPID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "BOMLEVEL",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "BOMLEVEL",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "BOMUNITSYMBOL",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "BOMUNITSYMBOL",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "FLUSHINGPRINCIPLE",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "FLUSHINGPRINCIPLE",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "WILLINVENTORYRECEIPTIGNOREFLUSHINGPRINCIPLE",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "WILLINVENTORYRECEIPTIGNOREFLUSHINGPRINCIPLE",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "COMMISSIONPRODUCTGROUPID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "COMMISSIONPRODUCTGROUPID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "COSTGROUPID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "COSTGROUPID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ISUNITCOSTAUTOMATICALLYUPDATED",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISUNITCOSTAUTOMATICALLYUPDATED",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCTIONCONSUMPTIONDENSITYCONVERSIONFACTOR",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "PRODUCTIONCONSUMPTIONDENSITYCONVERSIONFACTOR",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCTIONCONSUMPTIONDEPTHCONVERSIONFACTOR",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "PRODUCTIONCONSUMPTIONDEPTHCONVERSIONFACTOR",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCTIONCONSUMPTIONWIDTHCONVERSIONFACTOR",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "PRODUCTIONCONSUMPTIONWIDTHCONVERSIONFACTOR",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCTIONCONSUMPTIONHEIGHTCONVERSIONFACTOR",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "PRODUCTIONCONSUMPTIONHEIGHTCONVERSIONFACTOR",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "GROSSDEPTH",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "GROSSDEPTH",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "GROSSPRODUCTHEIGHT",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "GROSSPRODUCTHEIGHT",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "GROSSPRODUCTWIDTH",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "GROSSPRODUCTWIDTH",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCTVOLUME",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "PRODUCTVOLUME",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "NETPRODUCTWEIGHT",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "NETPRODUCTWEIGHT",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "BUYERGROUPID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "BUYERGROUPID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ISUNITCOSTPRODUCTVARIANTSPECIFIC",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISUNITCOSTPRODUCTVARIANTSPECIFIC",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "PURCHASEPRICETOLERANCEGROUPID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PURCHASEPRICETOLERANCEGROUPID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "VENDORINVOICELINEMATCHINGPOLICY",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "VENDORINVOICELINEMATCHINGPOLICY",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "PACKINGMATERIALGROUPID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PACKINGMATERIALGROUPID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "BESTBEFOREPERIODDAYS",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "BESTBEFOREPERIODDAYS",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "FREIGHTALLOCATIONGROUPID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "FREIGHTALLOCATIONGROUPID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SALESREBATEPRODUCTGROUPID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "SALESREBATEPRODUCTGROUPID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "POTENCYBASEATTRIBUTEVALUEENTRYEVENT",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "POTENCYBASEATTRIBUTEVALUEENTRYEVENT",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "SHELFADVICEPERIODDAYS",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "SHELFADVICEPERIODDAYS",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "SHELFLIFEPERIODDAYS",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "SHELFLIFEPERIODDAYS",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "POTENCYBASEATTIBUTETARGETVALUE",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "POTENCYBASEATTIBUTETARGETVALUE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "APPROVEDVENDORCHECKMETHOD",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "APPROVEDVENDORCHECKMETHOD",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ISPHANTOM",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISPHANTOM",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "PLANNINGFORMULAITEMNUMBER",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PLANNINGFORMULAITEMNUMBER",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCTIONTYPE",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "PRODUCTIONTYPE",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "YIELDPERCENTAGE",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "YIELDPERCENTAGE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PRIMARYVENDORACCOUNTNUMBER",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PRIMARYVENDORACCOUNTNUMBER",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCTIONGROUPID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PRODUCTIONGROUPID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCTIONPOOLID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PRODUCTIONPOOLID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PROJECTCATEGORYID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PROJECTCATEGORYID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "NECESSARYPRODUCTIONWORKINGTIMESCHEDULINGPROPERTYID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "NECESSARYPRODUCTIONWORKINGTIMESCHEDULINGPROPERTYID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ISPURCHASEPRICEAUTOMATICALLYUPDATED",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISPURCHASEPRICEAUTOMATICALLYUPDATED",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCTCOVERAGEGROUPID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PRODUCTCOVERAGEGROUPID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SALESPRICECALCULATIONMODEL",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "SALESPRICECALCULATIONMODEL",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "BASESALESPRICESOURCE",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "BASESALESPRICESOURCE",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "SALESPRICECALCULATIONCONTRIBUTIONRATIO",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "SALESPRICECALCULATIONCONTRIBUTIONRATIO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SALESPRICECALCULATIONCHARGESPERCENTAGE",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "SALESPRICECALCULATIONCHARGESPERCENTAGE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CONSTANTSCRAPQUANTITY",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "CONSTANTSCRAPQUANTITY",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "VARIABLESCRAPPERCENTAGE",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "VARIABLESCRAPPERCENTAGE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SERIALNUMBERGROUPCODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "SERIALNUMBERGROUPCODE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SHIPPINGANDRECEIVINGSORTORDERCODE",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "SHIPPINGANDRECEIVINGSORTORDERCODE",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "DEFAULTPRODUCTCONFIGURATIONID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "DEFAULTPRODUCTCONFIGURATIONID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DEFAULTPRODUCTCOLORID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "DEFAULTPRODUCTCOLORID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DEFAULTPRODUCTSIZEID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "DEFAULTPRODUCTSIZEID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DEFAULTPRODUCTSTYLEID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "DEFAULTPRODUCTSTYLEID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "TAREPRODUCTWEIGHT",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "TAREPRODUCTWEIGHT",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PACKINGDUTYQUANTITY",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "PACKINGDUTYQUANTITY",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ARRIVALHANDLINGTIME",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ARRIVALHANDLINGTIME",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "WAREHOUSEFILTERCODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "WAREHOUSEFILTERCODE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "WAREHOUSEFILTERGROUP",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "WAREHOUSEFILTERGROUP",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "MAXIMUMPICKQUANTITY",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "MAXIMUMPICKQUANTITY",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PACKAGECLASSID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PACKAGECLASSID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PACKSIZECATEGORYID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PACKSIZECATEGORYID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PHYSICALDIMENSIONGROUPID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PHYSICALDIMENSIONGROUPID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "WILLWORKCENTERPICKINGALLOWNEGATIVEINVENTORY",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "WILLWORKCENTERPICKINGALLOWNEGATIVEINVENTORY",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "DEFAULTRECEIVINGQUANTITY",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "DEFAULTRECEIVINGQUANTITY",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "WAREHOUSEMOBILEDEVICEDESCRIPTIONLINE1",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "WAREHOUSEMOBILEDEVICEDESCRIPTIONLINE1",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "WAREHOUSEMOBILEDEVICEDESCRIPTIONLINE2",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "WAREHOUSEMOBILEDEVICEDESCRIPTIONLINE2",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "RAWMATERIALPICKINGPRINCIPLE",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "RAWMATERIALPICKINGPRINCIPLE",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "UNITCONVERSIONSEQUENCEGROUPID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "UNITCONVERSIONSEQUENCEGROUPID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CATCHWEIGHTUNITSYMBOL",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "CATCHWEIGHTUNITSYMBOL",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "MAXIMUMCATCHWEIGHTQUANTITY",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "MAXIMUMCATCHWEIGHTQUANTITY",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "MINIMUMCATCHWEIGHTQUANTITY",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "MINIMUMCATCHWEIGHTQUANTITY",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ISSALESPRICEADJUSTMENTALLOWED",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISSALESPRICEADJUSTMENTALLOWED",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "CONTINUITYEVENTDURATION",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "CONTINUITYEVENTDURATION",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "CONTINUITYSCHEDULEID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "CONTINUITYSCHEDULEID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ISRESTRICTEDFORCOUPONS",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISRESTRICTEDFORCOUPONS",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "DEFAULTDIRECTDELIVERYWAREHOUSE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "DEFAULTDIRECTDELIVERYWAREHOUSE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ISDELIVEREDDIRECTLY",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISDELIVEREDDIRECTLY",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ISEXEMPTFROMAUTOMATICNOTIFICATIONANDCANCELLATION",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISEXEMPTFROMAUTOMATICNOTIFICATIONANDCANCELLATION",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ISINSTALLMENTELIGIBLE",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISINSTALLMENTELIGIBLE",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "WILLPICKINGWORKBENCHAPPLYBOXINGLOGIC",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "WILLPICKINGWORKBENCHAPPLYBOXINGLOGIC",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "PURCHASEREBATEPRODUCTGROUPID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PURCHASEREBATEPRODUCTGROUPID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SELLENDDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "SELLENDDATE",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "SELLSTARTDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "SELLSTARTDATE",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "ISSHIPALONEENABLED",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISSHIPALONEENABLED",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "SHIPSTARTDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "SHIPSTARTDATE",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "BARCODESETUPID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "BARCODESETUPID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "COMPARISONPRICEBASEUNITSYMBOL",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "COMPARISONPRICEBASEUNITSYMBOL",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ISSCALEPRODUCT",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISSCALEPRODUCT",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ISPOSREGISTRATIONBLOCKED",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISPOSREGISTRATIONBLOCKED",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "POSREGISTRATIONBLOCKEDDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "POSREGISTRATIONBLOCKEDDATE",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "POSREGISTRATIONPLANNEDBLOCKEDDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "POSREGISTRATIONPLANNEDBLOCKEDDATE",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "POSREGISTRATIONACTIVATIONDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "POSREGISTRATIONACTIVATIONDATE",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "KEYINPRICEREQUIREMENTSATPOSREGISTER",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "KEYINPRICEREQUIREMENTSATPOSREGISTER",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "KEYINQUANTITYREQUIREMENTSATPOSREGISTER",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "KEYINQUANTITYREQUIREMENTSATPOSREGISTER",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "MUSTKEYINCOMMENTATPOSREGISTER",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "MUSTKEYINCOMMENTATPOSREGISTER",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ISZEROPRICEPOSREGISTRATIONALLOWED",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISZEROPRICEPOSREGISTRATIONALLOWED",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ISDISCOUNTPOSREGISTRATIONPROHIBITED",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISDISCOUNTPOSREGISTRATIONPROHIBITED",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ISPOSREGISTRATIONQUANTITYNEGATIVE",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISPOSREGISTRATIONQUANTITYNEGATIVE",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCTLIFECYCLESEASONCODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PRODUCTLIFECYCLESEASONCODE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCTLIFECYCLEVALIDFROMDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "PRODUCTLIFECYCLEVALIDFROMDATE",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCTLIFECYCLEVALIDTODATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "PRODUCTLIFECYCLEVALIDTODATE",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "ISVARIANTSHELFLABELSPRINTINGENABLED",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISVARIANTSHELFLABELSPRINTINGENABLED",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "TRANSFERORDEROVERDELIVERYPERCENTAGE",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "TRANSFERORDEROVERDELIVERYPERCENTAGE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "TRANSFERORDERUNDERDELIVERYPERCENTAGE",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "TRANSFERORDERUNDERDELIVERYPERCENTAGE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "UNITCOST",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "UNITCOST",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "UNITCOSTDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "UNITCOSTDATE",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "UNITCOSTQUANTITY",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "UNITCOSTQUANTITY",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ISUNITCOSTINCLUDINGCHARGES",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISUNITCOSTINCLUDINGCHARGES",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "FIXEDCOSTCHARGES",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "FIXEDCOSTCHARGES",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "INVENTORYUNITSYMBOL",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "INVENTORYUNITSYMBOL",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ISINTERCOMPANYSALESUSAGEBLOCKED",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISINTERCOMPANYSALESUSAGEBLOCKED",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "SALESSALESTAXITEMGROUPCODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "SALESSALESTAXITEMGROUPCODE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "WILLTOTALSALESDISCOUNTCALCULATIONINCLUDEPRODUCT",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "WILLTOTALSALESDISCOUNTCALCULATIONINCLUDEPRODUCT",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "SALESLINEDISCOUNTPRODUCTGROUPCODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "SALESLINEDISCOUNTPRODUCTGROUPCODE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SALESMULTILINEDISCOUNTPRODUCTGROUPCODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "SALESMULTILINEDISCOUNTPRODUCTGROUPCODE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SALESSUPPLEMENTARYPRODUCTPRODUCTGROUPID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "SALESSUPPLEMENTARYPRODUCTPRODUCTGROUPID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SALESCHARGEPRODUCTGROUPID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "SALESCHARGEPRODUCTGROUPID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SALESOVERDELIVERYPERCENTAGE",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "SALESOVERDELIVERYPERCENTAGE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SALESUNDERDELIVERYPERCENTAGE",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "SALESUNDERDELIVERYPERCENTAGE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SALESPRICINGPRECISION",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "SALESPRICINGPRECISION",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "SALESPRICE",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "SALESPRICE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SALESPRICEDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "SALESPRICEDATE",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "SALESPRICEQUANTITY",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "SALESPRICEQUANTITY",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SALESUNITSYMBOL",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "SALESUNITSYMBOL",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ISSALESPRICEINCLUDINGCHARGES",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISSALESPRICEINCLUDINGCHARGES",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "FIXEDSALESPRICECHARGES",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "FIXEDSALESPRICECHARGES",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PURCHASESALESTAXITEMGROUPCODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PURCHASESALESTAXITEMGROUPCODE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ISINTERCOMPANYPURCHASEUSAGEBLOCKED",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISINTERCOMPANYPURCHASEUSAGEBLOCKED",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "PURCHASELINEDISCOUNTPRODUCTGROUPCODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PURCHASELINEDISCOUNTPRODUCTGROUPCODE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PURCHASEMULTILINEDISCOUNTPRODUCTGROUPCODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PURCHASEMULTILINEDISCOUNTPRODUCTGROUPCODE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "WILLTOTALPURCHASEDISCOUNTCALCULATIONINCLUDEPRODUCT",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "WILLTOTALPURCHASEDISCOUNTCALCULATIONINCLUDEPRODUCT",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "PURCHASESUPPLEMENTARYPRODUCTPRODUCTGROUPID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PURCHASESUPPLEMENTARYPRODUCTPRODUCTGROUPID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PURCHASEOVERDELIVERYPERCENTAGE",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "PURCHASEOVERDELIVERYPERCENTAGE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PURCHASEUNDERDELIVERYPERCENTAGE",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "PURCHASEUNDERDELIVERYPERCENTAGE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PURCHASEPRICINGPRECISION",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "PURCHASEPRICINGPRECISION",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "PURCHASEPRICE",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "PURCHASEPRICE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PURCHASEPRICEDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "PURCHASEPRICEDATE",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "PURCHASEPRICEQUANTITY",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "PURCHASEPRICEQUANTITY",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PURCHASEUNITSYMBOL",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PURCHASEUNITSYMBOL",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PURCHASECHARGEPRODUCTGROUPID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PURCHASECHARGEPRODUCTGROUPID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ISPURCHASEPRICEINCLUDINGCHARGES",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISPURCHASEPRICEINCLUDINGCHARGES",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "FIXEDPURCHASEPRICECHARGES",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "FIXEDPURCHASEPRICECHARGES",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "INTRASTATCOMMODITYCODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "INTRASTATCOMMODITYCODE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "INTRASTATCHARGEPERCENTAGE",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "INTRASTATCHARGEPERCENTAGE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ORIGINCOUNTRYREGIONID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ORIGINCOUNTRYREGIONID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ORIGINSTATEID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ORIGINSTATEID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "APPROXIMATESALESTAXPERCENTAGE",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "APPROXIMATESALESTAXPERCENTAGE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ITEMFISCALCLASSIFICATIONEXCEPTIONCODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ITEMFISCALCLASSIFICATIONEXCEPTIONCODE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCTFISCALINFORMATIONTYPE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PRODUCTFISCALINFORMATIONTYPE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ISICMSTAXAPPLIEDONSERVICE",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISICMSTAXAPPLIEDONSERVICE",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCTTAXATIONORIGIN",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "PRODUCTTAXATIONORIGIN",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ITEMFISCALCLASSIFICATIONCODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ITEMFISCALCLASSIFICATIONCODE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SERVICEFISCALINFORMATIONCODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "SERVICEFISCALINFORMATIONCODE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ISSALESWITHHOLDINGTAXCALCULATED",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISSALESWITHHOLDINGTAXCALCULATED",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "SALESITEMWITHHOLDINGTAXGROUPCODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "SALESITEMWITHHOLDINGTAXGROUPCODE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ISPURCHASEWITHHOLDINGTAXCALCULATED",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISPURCHASEWITHHOLDINGTAXCALCULATED",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "PURCHASEITEMWITHHOLDINGTAXGROUPCODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PURCHASEITEMWITHHOLDINGTAXGROUPCODE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SALESGSTRELIEFCATEGORYCODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "SALESGSTRELIEFCATEGORYCODE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PURCHASEGSTRELIEFCATEGORYCODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PURCHASEGSTRELIEFCATEGORYCODE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "INVENTORYGSTRELIEFCATEGORYCODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "INVENTORYGSTRELIEFCATEGORYCODE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "NGPCODE",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "NGPCODE",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "SADGROUP",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "SADGROUP",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ISMANUALDISCOUNTPOSREGISTRATIONPROHIBITED",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISMANUALDISCOUNTPOSREGISTRATIONPROHIBITED",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "INVENTORYCOUNTINGREASONCODEPOLICYNAME",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "INVENTORYCOUNTINGREASONCODEPOLICYNAME",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "HSNCODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "HSNCODE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SERVICEACCOUNTINGCODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "SERVICEACCOUNTINGCODE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SATCODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "SATCODE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SCALEINDICATOR",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "SCALEINDICATOR",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "CNPJ",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "CNPJ",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "TAXSUBSTITUTIONCODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "TAXSUBSTITUTIONCODE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PARTITION",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PARTITION_COL",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCTLIFECYCLESTATEID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PRODUCTLIFECYCLESTATEID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "UPDATEPRODUCTVARIANTLIFECYCLESTATE",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "UPDATEPRODUCTVARIANTLIFECYCLESTATE",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "CATCHWEIGHTITEMHANDLINGPOLICYNAME",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "CATCHWEIGHTITEMHANDLINGPOLICYNAME",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ALM_ADMINFEE",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ALM_ADMINFEE",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ALM_ALTITEMID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ALM_ALTITEMID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ALM_APPLYBROKENCASEFLAG",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ALM_APPLYBROKENCASEFLAG",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ALM_INCLUDEINPRICEBOOK",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ALM_INCLUDEINPRICEBOOK",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ALM_LASTSOLDDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "ALM_LASTSOLDDATE",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "ALM_MULTIPACK",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ALM_MULTIPACK",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ALM_PALLETQUANTITY",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ALM_PALLETQUANTITY",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ALM_LAYERQUANTITY",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ALM_LAYERQUANTITY",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ALM_CREATEDDATETIME",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "ALM_CREATEDDATETIME",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "DATAAREAID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "DATAAREAID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SYNCSTARTDATETIME",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "SYNCSTARTDATETIME",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "CREATED_DT"
+								},
+								"sink": {
+									"name": "CREATED_DT",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "CREATED_BY"
+								},
+								"sink": {
+									"name": "CREATED_BY",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SOURCE_SYSTEM_CD"
+								},
+								"sink": {
+									"name": "SOURCE_SYSTEM_CD",
+									"type": "Int32"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "AZURE_SQL_EcoResReleasedProductV2Staging",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "HANA_ODBC_STG_DYN_RELEASED_PRODUCT_V2",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "EIM_Pipelines"
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-09-30T06:40:07Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

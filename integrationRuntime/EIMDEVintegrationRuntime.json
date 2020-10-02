@@ -1,0 +1,7 @@
+{
+	"name": "EIMDEVintegrationRuntime",
+	"properties": {
+		"type": "SelfHosted",
+		"description": "This is the Datafactory integration service back into EIM for staging data into Azure"
+	}
+}

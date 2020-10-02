@@ -1,0 +1,19 @@
+{
+	"name": "HANA_ODBC_STG_DYN_ALM_INVENT_SUM",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "EIM_HANA_HNQ_test",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "HANA_ODBC"
+		},
+		"annotations": [],
+		"type": "OdbcTable",
+		"schema": [],
+		"typeProperties": {
+			"tableName": "\"EIM_EDM\".\"STG_DYN_ALM_INVENT_SUM\""
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

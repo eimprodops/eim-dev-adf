@@ -1,0 +1,122 @@
+{
+	"name": "trigger_BYOD_HANA",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "ALMNZ_BYOD_CustCustomerGroupEntity_HANA",
+					"type": "PipelineReference"
+				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "ALMNZ_BYOD_CustCustomerV3_HANA",
+					"type": "PipelineReference"
+				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "ALMNZ_BYOD_EcoResProductAttributeValue_HANA",
+					"type": "PipelineReference"
+				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "ALMNZ_BYOD_EcoResProductCategoryAssignment_HANA",
+					"type": "PipelineReference"
+				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "ALMNZ_BYOD_EcoResProductCategoryStaging_HANA",
+					"type": "PipelineReference"
+				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "ALMNZ_BYOD_EcoResProductUnitOfMeasureConversion_HANA",
+					"type": "PipelineReference"
+				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "ALMNZ_BYOD_EcoResProductV2_HANA",
+					"type": "PipelineReference"
+				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "ALMNZ_BYOD_EcoResReleasedProductV2_HANA",
+					"type": "PipelineReference"
+				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "ALMNZ_BYOD_FreeTextInvoice_HANA",
+					"type": "PipelineReference"
+				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "ALMNZ_BYOD_InventOperationalSite_HANA",
+					"type": "PipelineReference"
+				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "ALMNZ_BYOD_ReqItemCoverageSettingsV2_HANA",
+					"type": "PipelineReference"
+				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "ALMNZ_BYOD_SalesInvoiceHeaderV2_HANA",
+					"type": "PipelineReference"
+				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "ALMNZ_BYOD_SalesInvoiceLineV2_HANA",
+					"type": "PipelineReference"
+				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "ALMNZ_BYOD_VendVendorV2_HANA",
+					"type": "PipelineReference"
+				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "ALMNZ_BYOD_ALM_InventSum_HANA",
+					"type": "PipelineReference"
+				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "ALMNZ_BYOD_ALM_PBI_InventDimStaging_HANA",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2020-08-24T03:38:00Z",
+				"timeZone": "UTC",
+				"schedule": {
+					"minutes": [
+						0
+					],
+					"hours": [
+						15
+					]
+				}
+			}
+		}
+	}
+}

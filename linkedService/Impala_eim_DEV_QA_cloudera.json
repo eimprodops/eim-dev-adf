@@ -1,0 +1,19 @@
+{
+	"name": "Impala_eim_DEV_QA_cloudera",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "EIM Hadoop DEV and QA Datalake and databases.",
+		"annotations": [],
+		"type": "Impala",
+		"typeProperties": {
+			"host": "172.17.2.2",
+			"port": 21050,
+			"authenticationType": "Anonymous",
+			"enableSsl": false
+		},
+		"connectVia": {
+			"referenceName": "EIMDEVintegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

@@ -1,0 +1,24 @@
+{
+	"name": "EIM_DEVQA_Hive_Cloudera",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "EIM DEVQA Hadoop via HIVE",
+		"annotations": [],
+		"type": "Hive",
+		"typeProperties": {
+			"host": "eim-dev-cloud-01.metcash.com",
+			"port": 10000,
+			"serverType": "HiveServer2",
+			"authenticationType": "UsernameAndPassword",
+			"serviceDiscoveryMode": false,
+			"useNativeQuery": false,
+			"username": "hive",
+			"enableSsl": false,
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIxNWNhZjlmMC01NWYyLTQyMjUtODUzNi01N2VmODBkNGIzMTAiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "EIMDEVintegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

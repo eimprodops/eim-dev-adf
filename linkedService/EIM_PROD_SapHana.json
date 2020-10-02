@@ -1,0 +1,17 @@
+{
+	"name": "EIM_PROD_SapHana",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "EIM Sap Production Database",
+		"annotations": [],
+		"type": "SapHana",
+		"typeProperties": {
+			"connectionString": "servernode=172.17.194.1;uid=nicotro",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI0ZWI3NmQwNi1mNjQ4LTQ0ZjUtYWIzNC0xNjFkNTcxM2RkNTYiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "EIMDEVintegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

@@ -1,0 +1,19 @@
+{
+	"name": "DestinationDataset_8fh",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "EIM_HANA_HNQ_test",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Old"
+		},
+		"annotations": [],
+		"type": "OdbcTable",
+		"schema": [],
+		"typeProperties": {
+			"tableName": "\"EIM_EDM\".\"STG_DYN_SALES_LINE_V2\""
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

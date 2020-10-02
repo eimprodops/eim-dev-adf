@@ -1,0 +1,55 @@
+{
+	"name": "SourceDataset_e6g",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage_EiIM_DEV_Datalake",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Old"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "almuat.sandbox.operations.dynamics.com/AggregateMeasurements/SalesCube/SalesCube_Warehouses",
+				"fileSystem": "dynamics365-financeandoperations"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": false,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

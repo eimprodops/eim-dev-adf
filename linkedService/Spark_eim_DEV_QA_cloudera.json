@@ -1,0 +1,22 @@
+{
+	"name": "Spark_eim_DEV_QA_cloudera",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "Spark connection to EIM DEV_QA via Spark",
+		"annotations": [],
+		"type": "Spark",
+		"typeProperties": {
+			"host": "172.17.2.1",
+			"port": 80,
+			"serverType": "SparkThriftServer",
+			"thriftTransportProtocol": "HTTP",
+			"authenticationType": "Anonymous",
+			"enableSsl": false,
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJjMWI5NGI5NC0xN2Y1LTRlZWEtYWE3Yy0xYmJhYTJhNThmODIiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "EIMDEVintegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

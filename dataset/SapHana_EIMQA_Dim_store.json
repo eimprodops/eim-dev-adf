@@ -1,0 +1,21 @@
+{
+	"name": "SapHana_EIMQA_Dim_store",
+	"properties": {
+		"description": "Dim_Store",
+		"linkedServiceName": {
+			"referenceName": "EIM_QA_SapHana",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SAPHana_EIM_QA/Dimensions"
+		},
+		"annotations": [],
+		"type": "SapHanaTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "EIM_EDM",
+			"table": "DIM_STORE"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,20 @@
+{
+	"name": "SourceDataset_rik",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "EIM_QA_SapHana",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Old"
+		},
+		"annotations": [],
+		"type": "SapHanaTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "EIM_EDM",
+			"table": "DIM_PRODUCT"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

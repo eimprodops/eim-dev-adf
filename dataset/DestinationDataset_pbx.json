@@ -1,0 +1,1155 @@
+{
+	"name": "DestinationDataset_pbx",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "EIM_DEV_AzureSynapseAnalytics",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Old"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "PRODUCT_SK",
+				"type": "bigint",
+				"precision": 19,
+				"scale": 255
+			},
+			{
+				"name": "PRODUCT_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "COUNTRY_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "COMP_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "MN_COMP_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "BUS_PILLAR_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "PILLAR_STATE_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "MN_COMP_NM",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "COUNTRY_NM",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "COUNTRY_FORMAL_NM",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "COMP_NM",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "BUS_PILLAR_NM",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "DIVISION_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "DIVISION_NM",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "PILLAR_STATE_NM",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "PILLAR_STATE_NUM",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "BRCH_NUM",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "BRCH_LONG_NM",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "BRCH_SHORT_NM",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "PRODUCT_DESC",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "BRAND_NM",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "SUB_BRAND_NM",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "MSC_SECTION_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "MSC_SECTION_NM",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "MSC_DEPT_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "MSC_DEPT_NM",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "MSC_CATEGORY_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "MSC_CATEGORY_NM",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "MSC_COMMODITY_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "MSC_COMMODITY_NM",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "MSC_SUB_COMM_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "MSC_SUB_COMM_NM",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "PRIMARY_SUPP_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "PRIMARY_SUPP_NM",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "PAY_TO_SUPP_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "SUB_RANGE_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "SUB_RANGE_NM",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "GTI_NUM",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "GST_RATE",
+				"type": "decimal",
+				"precision": 14,
+				"scale": 4
+			},
+			{
+				"name": "GST_APPLICABLE_IND",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "WET_APPLICABLE_IND",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "RATABILITY_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "UNIT_SHAPE_DESC",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "BASUNIT_CAP_QTY",
+				"type": "decimal",
+				"precision": 15,
+				"scale": 3
+			},
+			{
+				"name": "BASUNIT_CAP_UOM_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "BASUNIT_P_OTU_QTY",
+				"type": "decimal",
+				"precision": 9,
+				"scale": 0
+			},
+			{
+				"name": "BASUNIT_P_ITU_QTY",
+				"type": "decimal",
+				"precision": 9,
+				"scale": 0
+			},
+			{
+				"name": "MIN_SELL_QTY",
+				"type": "decimal",
+				"precision": 9,
+				"scale": 0
+			},
+			{
+				"name": "STOCKED_ITEM_IND",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "SUBSTITUTE_PROD_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "PACKAGE_TYPE",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "HOUSE_BRAND_IND",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "LEVY_TYPE",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "LEVY_TYPE_NM",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "ITEM_TYPE_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "ITEM_TYPE_DESC",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "DUTY_FREE_IND",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "CNTRY_OF_MANUF_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "CNTRY_OF_MANUF_NM",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "CNTRY_OF_PACK_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "CNTRY_OF_PACK_NM",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "SHIP_FROM_CNTRY_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "SHIP_FROM_CNTRY_NM",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "ALCOHOL_STREN_DESC",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "ALCOHOL_VOL_PERC",
+				"type": "decimal",
+				"precision": 12,
+				"scale": 4
+			},
+			{
+				"name": "LAL_QTY",
+				"type": "decimal",
+				"precision": 12,
+				"scale": 4
+			},
+			{
+				"name": "TAX_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "TARG_MKT_SEG_NM",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "AGE_YEAR_QTY",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "VINTAGE_YEAR_NUM",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "REGION_NM",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "WET_RATE",
+				"type": "decimal",
+				"precision": 14,
+				"scale": 4
+			},
+			{
+				"name": "AREA_NM",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "ADDITIVES_NM",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "SWEETNESS_LEV_NM",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "SPARKLING_IND",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "GRAPE_VARIETY_NM",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "FORTIFIED_TYPE_NM",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "WOODED_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "CRUSHABILITY_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "GM_TRANSFER_IND",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "FLOW_THROUGH_IND",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "CS_PROD_CAT_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "PRICING_UNIT_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "SLOW_MOVER_IND",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "BONUS_PK_PROD_IND",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "PROD_ACTIVATION_DT",
+				"type": "datetime2",
+				"precision": 255,
+				"scale": 7
+			},
+			{
+				"name": "MAJOR_LINE_IND",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "COST_PROD_GRP_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "SLEEVE_STICK_QTY",
+				"type": "decimal",
+				"precision": 9,
+				"scale": 0
+			},
+			{
+				"name": "PHARMACY_ITEM_IND",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "DOM_DIST_LOCN_NM",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "MAX_ORDER_QTY",
+				"type": "decimal",
+				"precision": 9,
+				"scale": 0
+			},
+			{
+				"name": "CASE_WEIGHT_KG",
+				"type": "float",
+				"precision": 15,
+				"scale": 255
+			},
+			{
+				"name": "CASE_LITRES",
+				"type": "float",
+				"precision": 15,
+				"scale": 255
+			},
+			{
+				"name": "MB_GRADE_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "IMPORTED_FLAG_IND",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "MAX_ORDER_IN_FORCE_IND",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "TRADE_GTI_NUM",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "SHIPPING_QTY",
+				"type": "decimal",
+				"precision": 9,
+				"scale": 0
+			},
+			{
+				"name": "OUTERS_PER_LAYER_QTY",
+				"type": "decimal",
+				"precision": 17,
+				"scale": 5
+			},
+			{
+				"name": "LAYERS_PER_PALLET_QTY",
+				"type": "decimal",
+				"precision": 17,
+				"scale": 5
+			},
+			{
+				"name": "OUTER_HEIGHT_MM",
+				"type": "decimal",
+				"precision": 17,
+				"scale": 5
+			},
+			{
+				"name": "OUTER_WIDTH_MM",
+				"type": "decimal",
+				"precision": 17,
+				"scale": 5
+			},
+			{
+				"name": "OUTER_DEPTH_MM",
+				"type": "decimal",
+				"precision": 17,
+				"scale": 5
+			},
+			{
+				"name": "CORPORATE_BRAND_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "CORPORATE_BRAND_DSC",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "CUSTOMS_EXCISE_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "DIRECT_PRODUCT_IND",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "PRODUCT_CONVERSION_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "PRODUCT_STATUS_NATIONAL_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "PRODUCT_STATUS_BRANCH_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "RESTRICTED_PRODUCT_IND",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "RETAIL_PACK_QTY",
+				"type": "decimal",
+				"precision": 9,
+				"scale": 0
+			},
+			{
+				"name": "UNDER_BOND_IND",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "BRAND_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "RETAIL_DEPARTMENT_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "RETAIL_DEPARTMENT_NM",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "RETAIL_PRODUCT_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "FRESH_IND",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "PRODUCT_STATUS_FLG",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "PRODUCT_PACK_QTY",
+				"type": "decimal",
+				"precision": 9,
+				"scale": 0
+			},
+			{
+				"name": "CATCH_WEIGHT_IND",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "RANDOM_WEIGHT_IND",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "VTTG_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "FP_PRODUCT_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "FP_RETAIL_PRODUCT_LT",
+				"type": "decimal",
+				"precision": 15,
+				"scale": 3
+			},
+			{
+				"name": "FP_RETAIL_MASTER_GROUP_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "FP_RETAIL_MASTER_GROUP_NM",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "FP_RETAIL_PRODUCT_GROUP_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "FP_RETAIL_PRODUCT_GROUP_NM",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "FP_RETAIL_PRODUCT_FAMILY_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "FP_RETAIL_PRODUCT_FAMILY_NM",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "FP_RETAIL_PRODUCT_SECTOR_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "FP_RETAIL_PRODUCT_SECTOR_NM",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "FP_RETAIL_PRODUCT_CATEGORY_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "FP_RETAIL_PRODUCT_CATEGORY_NM",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "FP_RETAIL_QTY_CONV_FACTOR",
+				"type": "decimal",
+				"precision": 15,
+				"scale": 9
+			},
+			{
+				"name": "FP_RETAIL_ACTIVE_STATUS_IND",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "NATIONAL_CATEGORY_MANAGER_SK",
+				"type": "bigint",
+				"precision": 19,
+				"scale": 255
+			},
+			{
+				"name": "STATE_CATEGORY_MANAGER_SK",
+				"type": "bigint",
+				"precision": 19,
+				"scale": 255
+			},
+			{
+				"name": "PDM_CATEGORY_MANAGER_SK",
+				"type": "bigint",
+				"precision": 19,
+				"scale": 255
+			},
+			{
+				"name": "ACTIVE_FLAG",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "CREATED_BATCH_NO",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "UPDATED_BATCH_NO",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "CREATED_DT",
+				"type": "datetime2",
+				"precision": 255,
+				"scale": 7
+			},
+			{
+				"name": "UPDATED_DT",
+				"type": "datetime2",
+				"precision": 255,
+				"scale": 7
+			},
+			{
+				"name": "CREATED_BY",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "UPDATED_BY",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "UPSERT_FLAG",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "SOURCE_SYSTEM_CD",
+				"type": "int",
+				"precision": 10,
+				"scale": 255
+			},
+			{
+				"name": "HASH_KEY",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "CDS_ITEM_IND",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "PROD_MAT_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "PROD_MAT_NM",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "CONSUMER_UNIT_QTY",
+				"type": "int",
+				"precision": 10,
+				"scale": 255
+			},
+			{
+				"name": "SLOT_AREA",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "PRODUCT_STORAGE_TYP",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "ORDER_SPLIT_CATEGORY_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "CONTRACT_BOTTLER_FLG",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "SUPPLIER_CDS_LEVY_AMT",
+				"type": "float",
+				"precision": 15,
+				"scale": 255
+			},
+			{
+				"name": "INNER_GTIN",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "OUTER_GTIN",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "UNIT_SHAPE_CODE",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "DUTY_COUNTRY_OF_ORIGIN",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "GRAPE_VARIETY_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "ALCOHOL_STRENGTH_CD",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "TAX_CD_NM",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "SUPPLIER_TI",
+				"type": "float",
+				"precision": 15,
+				"scale": 255
+			},
+			{
+				"name": "SUPPLIER_HI",
+				"type": "float",
+				"precision": 15,
+				"scale": 255
+			},
+			{
+				"name": "DELETION_DATE",
+				"type": "date",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "DISCONTINUED_DATE",
+				"type": "date",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "CODE_DATED_FLAG",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "COOL_CODE",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "COOL_CODE_LEVEL",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "AUSTRALIAN_MADE_AND_GROWN_FLAG",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "FOOD_NON_FOOD_FLAG",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "DESPATCH_LIMIT_DAYS",
+				"type": "float",
+				"precision": 15,
+				"scale": 255
+			},
+			{
+				"name": "RECEIVING_LIMIT_DAYS",
+				"type": "float",
+				"precision": 15,
+				"scale": 255
+			},
+			{
+				"name": "MARKET_COST_PER_RETAILER_CASE",
+				"type": "float",
+				"precision": 15,
+				"scale": 255
+			},
+			{
+				"name": "STANDARD_COST_PER_RETAILER_CASE",
+				"type": "float",
+				"precision": 15,
+				"scale": 255
+			},
+			{
+				"name": "NEW_LINE_BASE_SRP",
+				"type": "float",
+				"precision": 15,
+				"scale": 255
+			},
+			{
+				"name": "STRATA_AMOUNT",
+				"type": "float",
+				"precision": 15,
+				"scale": 255
+			},
+			{
+				"name": "TEMPORARY_PRODUCT_CODE",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "FINAL_PRODUCT_CODE",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "TEMPORARY_PRODUCT_FLAG",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "COMMON_SRP",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "UNIT_OF_MEASURE",
+				"type": "nvarchar",
+				"precision": 255,
+				"scale": 255
+			},
+			{
+				"name": "UNITS_PER_PALLET",
+				"type": "float",
+				"precision": 15,
+				"scale": 255
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "EIM_DIM_PRODUCT"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

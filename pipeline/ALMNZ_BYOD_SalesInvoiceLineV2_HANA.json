@@ -1,0 +1,651 @@
+{
+	"name": "ALMNZ_BYOD_SalesInvoiceLineV2_HANA",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy_SalesInvoiceLineV2Staging",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "dbo.SalesInvoiceLineV2Staging"
+					},
+					{
+						"name": "Destination",
+						"value": "\"EIM_EDM\".\"STG_DYN_SALES_LINE_V2\""
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"additionalColumns": [
+							{
+								"name": "CREATED_DT",
+								"value": {
+									"value": "@convertFromUtc(utcnow(),'AUS Eastern Standard Time')",
+									"type": "Expression"
+								}
+							},
+							{
+								"name": "CREATED_BY",
+								"value": {
+									"value": "@pipeline().Pipeline",
+									"type": "Expression"
+								}
+							},
+							{
+								"name": "SOURCE_SYSTEM_CD",
+								"value": "16"
+							}
+						],
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "OdbcSink",
+						"writeBatchSize": 0,
+						"preCopyScript": "\nTRUNCATE TABLE EIM_EDM.STG_DYN_SALES_LINE_V2;"
+					},
+					"enableStaging": true,
+					"stagingSettings": {
+						"linkedServiceName": {
+							"referenceName": "AzureBlobStorage_EIM_DEV_DataLake",
+							"type": "LinkedServiceReference"
+						},
+						"path": "staging-eim-dev-sqldw"
+					},
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "LINETOTALDISCOUNTAMOUNT",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "LINETOTALDISCOUNTAMOUNT",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "LINETOTALTAXAMOUNT",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "LINETOTALTAXAMOUNT",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCTNAME",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PRODUCTNAME",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DEFINITIONGROUP",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "DEFINITIONGROUP",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "EXECUTIONID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "EXECUTIONID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ISSELECTED",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISSELECTED",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "TRANSFERSTATUS",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "TRANSFERSTATUS",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "INVOICEDQUANTITY",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "INVOICEDQUANTITY",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SALESPRICE",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "SALESPRICE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCTDESCRIPTION",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PRODUCTDESCRIPTION",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "INVOICENUMBER",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "INVOICENUMBER",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "INVOICEDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "INVOICEDATE",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "CURRENCYCODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "CURRENCYCODE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SALESUNITSYMBOL",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "SALESUNITSYMBOL",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CONFIRMEDSHIPPINGDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "CONFIRMEDSHIPPINGDATE",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCTNUMBER",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PRODUCTNUMBER",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "LINECREATIONSEQUENCENUMBER",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "LINECREATIONSEQUENCENUMBER",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "LINETOTALCHARGEAMOUNT",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "LINETOTALCHARGEAMOUNT",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "LINEAMOUNT",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "LINEAMOUNT",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "INVENTORYSITEID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "INVENTORYSITEID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "INVENTORYWAREHOUSEID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "INVENTORYWAREHOUSEID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCTSIZEID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PRODUCTSIZEID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCTCOLORID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PRODUCTCOLORID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCTCONFIGURATIONID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PRODUCTCONFIGURATIONID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCTSTYLEID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PRODUCTSTYLEID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ITEMBATCHNUMBER",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ITEMBATCHNUMBER",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ORDEREDINVENTORYSTATUSID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ORDEREDINVENTORYSTATUSID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DIMENSIONNUMBER",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "DIMENSIONNUMBER",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "LEDGERVOUCHER",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "LEDGERVOUCHER",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PARTITION",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PARTITION_COL",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ALM_SALESID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ALM_SALESID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ALM_CUSTGROUP",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ALM_CUSTGROUP",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ALM_CUSTACCOUNT",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ALM_CUSTACCOUNT",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ALM_CUSTNAME",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ALM_CUSTNAME",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ALM_VALUESTREAM",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ALM_VALUESTREAM",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ALM_OSC_CATEGORY",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ALM_OSC_CATEGORY",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ALM_MSC_CATEGORY",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ALM_MSC_CATEGORY",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ALM_MLC_CATEGORY",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ALM_MLC_CATEGORY",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ALM_MIT_CATEGORY",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ALM_MIT_CATEGORY",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ALM_TOTALCOST",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "ALM_TOTALCOST",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ALM_CASECOST",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "ALM_CASECOST",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ALM_INVENTTRANSID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ALM_INVENTTRANSID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SALESPRODUCTCATEGORYNAME",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "SALESPRODUCTCATEGORYNAME",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SALESPRODUCTCATEGORYHIERARCHYNAME",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "SALESPRODUCTCATEGORYHIERARCHYNAME",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCTVERSIONID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PRODUCTVERSIONID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DATAAREAID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "DATAAREAID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SYNCSTARTDATETIME",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "SYNCSTARTDATETIME",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "RECID",
+									"type": "Int64",
+									"physicalType": "bigint"
+								},
+								"sink": {
+									"name": "RECID",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "CREATED_DT"
+								},
+								"sink": {
+									"name": "CREATED_DT",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "CREATED_BY"
+								},
+								"sink": {
+									"name": "CREATED_BY",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SOURCE_SYSTEM_CD"
+								},
+								"sink": {
+									"name": "SOURCE_SYSTEM_CD",
+									"type": "Int32"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "AZURE_SQL_SalesInvoiceLineV2Staging",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "HANA_ODBC_STG_DYN_SALES_LINE_V2",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "EIM_Pipelines"
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-09-30T06:40:07Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

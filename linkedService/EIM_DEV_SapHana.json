@@ -1,0 +1,17 @@
+{
+	"name": "EIM_DEV_SapHana",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "EIM SAP Hana Dev Connection (HND)",
+		"annotations": [],
+		"type": "SapHana",
+		"typeProperties": {
+			"connectionString": "servernode=172.17.3.2;uid=nicotro",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI4YTIxZDM0ZC1lZjc2LTRiNzMtOWE5NC03MWE0NTZmZTEwMjMiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "EIMDEVintegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

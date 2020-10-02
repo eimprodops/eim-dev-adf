@@ -1,0 +1,28 @@
+{
+	"name": "Trigger_9sv",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "ALMNZ_UAT_SalesCube_CustomerInvoiceLines_HANA_QA",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"windowStart": "@{addhours(trigger().scheduledTime, -24)}",
+					"windowEnd": "@trigger().scheduledTime"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Hour",
+				"interval": 24,
+				"startTime": "2020-06-10T23:00:00Z",
+				"timeZone": "UTC"
+			}
+		}
+	}
+}

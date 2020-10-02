@@ -1,0 +1,568 @@
+{
+	"name": "EIM_AZUREDW_DEV_DIM_DATE",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "EIM_DEV_AzureSynapseAnalytics",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "AZURESQLDW_EIM_DEV"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "DATE_SK",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "GREG_DATE",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "GREG_DAY_NM",
+				"type": "nvarchar"
+			},
+			{
+				"name": "GREG_DAY_ABBR_NM",
+				"type": "nvarchar"
+			},
+			{
+				"name": "GREG_WK_DAY_NUM",
+				"type": "decimal",
+				"precision": 5,
+				"scale": 0
+			},
+			{
+				"name": "GREG_WK_START_DT",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "GREG_WK_END_DT",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "GREG_MTH_DAY_NUM",
+				"type": "decimal",
+				"precision": 5,
+				"scale": 0
+			},
+			{
+				"name": "GREG_MTH_WK_NUM",
+				"type": "decimal",
+				"precision": 5,
+				"scale": 0
+			},
+			{
+				"name": "GREG_MTH_NUM",
+				"type": "decimal",
+				"precision": 5,
+				"scale": 0
+			},
+			{
+				"name": "GREG_MONTH_NM",
+				"type": "nvarchar"
+			},
+			{
+				"name": "GREG_MTH_ABBR_NM",
+				"type": "nvarchar"
+			},
+			{
+				"name": "GREG_MTH_START_DT",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "GREG_MTH_END_DT",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "GREG_QTR_NUM",
+				"type": "decimal",
+				"precision": 5,
+				"scale": 0
+			},
+			{
+				"name": "GREG_QTR_NM",
+				"type": "nvarchar"
+			},
+			{
+				"name": "GREG_QTR_START_DT",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "GREG_QTR_END_DT",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "GREG_YEAR_DAY_NUM",
+				"type": "decimal",
+				"precision": 5,
+				"scale": 0
+			},
+			{
+				"name": "GREG_YEAR_WK_NUM",
+				"type": "decimal",
+				"precision": 5,
+				"scale": 0
+			},
+			{
+				"name": "GREG_YEAR_NUM",
+				"type": "decimal",
+				"precision": 5,
+				"scale": 0
+			},
+			{
+				"name": "GREG_YEAR_NM",
+				"type": "nvarchar"
+			},
+			{
+				"name": "GREG_YEAR_START_DT",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "GREG_YEAR_END_DT",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "GREG_MLST_DAY_IND",
+				"type": "nvarchar"
+			},
+			{
+				"name": "GREG_QLST_DAY_IND",
+				"type": "nvarchar"
+			},
+			{
+				"name": "GREG_YLST_DAY_IND",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PROM_DATE",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "PROM_DAY_NM",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PROM_DAY_ABBR_NM",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PROM_WK_DAY_NUM",
+				"type": "decimal",
+				"precision": 5,
+				"scale": 0
+			},
+			{
+				"name": "PROM_WK_START_DT",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "PROM_WK_END_DT",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "PROM_MTH_DAY_NUM",
+				"type": "decimal",
+				"precision": 5,
+				"scale": 0
+			},
+			{
+				"name": "PROM_MTH_WK_NUM",
+				"type": "decimal",
+				"precision": 5,
+				"scale": 0
+			},
+			{
+				"name": "PROM_MTH_NUM",
+				"type": "decimal",
+				"precision": 5,
+				"scale": 0
+			},
+			{
+				"name": "PROM_MONTH_NM",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PROM_MTH_ABBR_NM",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PROM_MTH_START_DT",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "PROM_MTH_END_DT",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "PROM_QTR_NUM",
+				"type": "decimal",
+				"precision": 5,
+				"scale": 0
+			},
+			{
+				"name": "PROM_QTR_NM",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PROM_QTR_START_DT",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "PROM_QTR_END_DT",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "PROM_YEAR_DAY_NUM",
+				"type": "decimal",
+				"precision": 5,
+				"scale": 0
+			},
+			{
+				"name": "PROM_YEAR_WK_NUM",
+				"type": "decimal",
+				"precision": 5,
+				"scale": 0
+			},
+			{
+				"name": "PROM_YEAR_NUM",
+				"type": "decimal",
+				"precision": 5,
+				"scale": 0
+			},
+			{
+				"name": "PROM_YEAR_NM",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PROM_YEAR_START_DT",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "PROM_YEAR_END_DT",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "PROM_MLST_DAY_IND",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PROM_QLST_DAY_IND",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PROM_YLST_DAY_IND",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FISC_DATE",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "FISC_DAY_NM",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FISC_DAY_ABBR_NM",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FISC_WK_DAY_NUM",
+				"type": "decimal",
+				"precision": 5,
+				"scale": 0
+			},
+			{
+				"name": "FISC_WK_START_DT",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "FISC_WK_END_DT",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "FISC_MTH_DAY_NUM",
+				"type": "decimal",
+				"precision": 5,
+				"scale": 0
+			},
+			{
+				"name": "FISC_MTH_WK_NUM",
+				"type": "decimal",
+				"precision": 5,
+				"scale": 0
+			},
+			{
+				"name": "FISC_MTH_NUM",
+				"type": "decimal",
+				"precision": 5,
+				"scale": 0
+			},
+			{
+				"name": "FISC_MONTH_NM",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FISC_MTH_ABBR_NM",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FISC_MTH_START_DT",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "FISC_MTH_END_DT",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "FISC_QTR_NUM",
+				"type": "decimal",
+				"precision": 5,
+				"scale": 0
+			},
+			{
+				"name": "FISC_QTR_NM",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FISC_QTR_START_DT",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "FISC_QTR_END_DT",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "FISC_YEAR_DAY_NUM",
+				"type": "decimal",
+				"precision": 5,
+				"scale": 0
+			},
+			{
+				"name": "FISC_YEAR_WK_NUM",
+				"type": "decimal",
+				"precision": 5,
+				"scale": 0
+			},
+			{
+				"name": "FISC_YEAR_NUM",
+				"type": "decimal",
+				"precision": 5,
+				"scale": 0
+			},
+			{
+				"name": "FISC_YEAR_NM",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FISC_YEAR_START_DT",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "FISC_YEAR_END_DT",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "FISC_MLST_DAY_IND",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FISC_QLST_DAY_IND",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FISC_YLST_DAY_IND",
+				"type": "nvarchar"
+			},
+			{
+				"name": "NATFIN_DATE",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "NATFIN_DAY_NM",
+				"type": "nvarchar"
+			},
+			{
+				"name": "NATFIN_DAY_ABBR_NM",
+				"type": "nvarchar"
+			},
+			{
+				"name": "NATFIN_WK_DAY_NUM",
+				"type": "decimal",
+				"precision": 5,
+				"scale": 0
+			},
+			{
+				"name": "NATFIN_WK_START_DT",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "NATFIN_WK_END_DT",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "NATFIN_MTH_DAY_NUM",
+				"type": "decimal",
+				"precision": 5,
+				"scale": 0
+			},
+			{
+				"name": "NATFIN_MTH_WK_NUM",
+				"type": "decimal",
+				"precision": 5,
+				"scale": 0
+			},
+			{
+				"name": "NATFIN_MTH_NUM",
+				"type": "decimal",
+				"precision": 5,
+				"scale": 0
+			},
+			{
+				"name": "NATFIN_MONTH_NM",
+				"type": "nvarchar"
+			},
+			{
+				"name": "NATFIN_MTH_ABBR_NM",
+				"type": "nvarchar"
+			},
+			{
+				"name": "NATF_MTH_START_DT",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "NATFIN_MTH_END_DT",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "NATFIN_QTR_NUM",
+				"type": "decimal",
+				"precision": 5,
+				"scale": 0
+			},
+			{
+				"name": "NATFIN_QTR_NM",
+				"type": "nvarchar"
+			},
+			{
+				"name": "NATF_QTR_START_DT",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "NATFIN_QTR_END_DT",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "NATF_YEAR_DAY_NUM",
+				"type": "decimal",
+				"precision": 5,
+				"scale": 0
+			},
+			{
+				"name": "NATFIN_YEAR_WK_NUM",
+				"type": "decimal",
+				"precision": 5,
+				"scale": 0
+			},
+			{
+				"name": "NATFIN_YEAR_NUM",
+				"type": "decimal",
+				"precision": 5,
+				"scale": 0
+			},
+			{
+				"name": "NATFIN_YEAR_NM",
+				"type": "nvarchar"
+			},
+			{
+				"name": "NATF_YEAR_START_DT",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "NATFIN_YEAR_END_DT",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "NATF_MLST_DAY_IND",
+				"type": "nvarchar"
+			},
+			{
+				"name": "NATF_QLST_DAY_IND",
+				"type": "nvarchar"
+			},
+			{
+				"name": "NATF_YLST_DAY_IND",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DAYLIGHT_SAV_IND",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CREATED_BATCH_NO",
+				"type": "decimal",
+				"precision": 9,
+				"scale": 0
+			},
+			{
+				"name": "UPDATED_BATCH_NO",
+				"type": "decimal",
+				"precision": 9,
+				"scale": 0
+			},
+			{
+				"name": "CREATED_DT",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "UPDATED_DT",
+				"type": "datetime2",
+				"scale": 7
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "EIM_DIM_DATE"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

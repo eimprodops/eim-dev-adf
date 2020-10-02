@@ -1,0 +1,17 @@
+{
+	"name": "SourceDataset_8kz",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "EIM_PROD_SapHana",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SapHanaTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "EIM_EDM",
+			"table": "DIM_PRODUCT_DENORM"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

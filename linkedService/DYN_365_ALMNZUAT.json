@@ -1,0 +1,13 @@
+{
+	"name": "DYN_365_ALMNZUAT",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "ALM NZ BYOD",
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"connectionString": "integrated security=False;encrypt=True;connection timeout=30;data source=eimdevpoc.database.windows.net;initial catalog=DYN365_BYOD_ALMNZUAT;user id=eimadmin",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkVJTURFVkRBVEFGQUNUT1JZXzNiM2VlNDVjLWZhOTYtNGQwMC1iYjgzLTY0ZjQ0MTI2NTJjOSINCn0="
+		}
+	}
+}

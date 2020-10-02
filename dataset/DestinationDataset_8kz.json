@@ -1,0 +1,17 @@
+{
+	"name": "DestinationDataset_8kz",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "EIM_DEV_AzureSynapseAnalytics",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "EIM_DIM_PRODUCT_DENORM"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

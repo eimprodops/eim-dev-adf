@@ -1,0 +1,442 @@
+{
+	"name": "ALMNZ_BYOD_EcoResProductV2_HANA",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy_EcoResProductV2Staging",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "dbo.SalesInvoiceLineV2Staging"
+					},
+					{
+						"name": "Destination",
+						"value": "\"EIM_EDM\".\"STG_DYN_SALES_LINE_V2\""
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"additionalColumns": [
+							{
+								"name": "CREATED_DT",
+								"value": {
+									"value": "@convertFromUtc(utcnow(),'AUS Eastern Standard Time')",
+									"type": "Expression"
+								}
+							},
+							{
+								"name": "CREATED_BY",
+								"value": {
+									"value": "@pipeline().Pipeline",
+									"type": "Expression"
+								}
+							},
+							{
+								"name": "SOURCE_SYSTEM_CD",
+								"value": "16"
+							}
+						],
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "OdbcSink",
+						"writeBatchSize": 0,
+						"preCopyScript": "TRUNCATE TABLE EIM_EDM.STG_DYN_PRODUCT_V2;"
+					},
+					"enableStaging": true,
+					"stagingSettings": {
+						"linkedServiceName": {
+							"referenceName": "AzureBlobStorage_EIM_DEV_DataLake",
+							"type": "LinkedServiceReference"
+						},
+						"path": "staging-eim-dev-sqldw"
+					},
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "DEFINITIONGROUP",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "DEFINITIONGROUP",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "EXECUTIONID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "EXECUTIONID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ISSELECTED",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISSELECTED",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "TRANSFERSTATUS",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "TRANSFERSTATUS",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCTTYPE",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "PRODUCTTYPE",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCTSUBTYPE",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "PRODUCTSUBTYPE",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCTNUMBER",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PRODUCTNUMBER",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCTNAME",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PRODUCTNAME",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCTSEARCHNAME",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PRODUCTSEARCHNAME",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCTDESCRIPTION",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PRODUCTDESCRIPTION",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ISCATCHWEIGHTPRODUCT",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISCATCHWEIGHTPRODUCT",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCTDIMENSIONGROUPNAME",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PRODUCTDIMENSIONGROUPNAME",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "STORAGEDIMENSIONGROUPNAME",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "STORAGEDIMENSIONGROUPNAME",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "TRACKINGDIMENSIONGROUPNAME",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "TRACKINGDIMENSIONGROUPNAME",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "VARIANTCONFIGURATIONTECHNOLOGY",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "VARIANTCONFIGURATIONTECHNOLOGY",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "AREIDENTICALCONFIGURATIONSALLOWED",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "AREIDENTICALCONFIGURATIONSALLOWED",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ISAUTOMATICVARIANTGENERATIONENABLED",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISAUTOMATICVARIANTGENERATIONENABLED",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ISPRODUCTVARIANTUNITCONVERSIONENABLED",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISPRODUCTVARIANTUNITCONVERSIONENABLED",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "RETAILPRODUCTCATEGORYNAME",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "RETAILPRODUCTCATEGORYNAME",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCTCOLORGROUPID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PRODUCTCOLORGROUPID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCTSIZEGROUPID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PRODUCTSIZEGROUPID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCTSTYLEGROUPID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PRODUCTSTYLEGROUPID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ISPRODUCTKIT",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISPRODUCTKIT",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "STCCCODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "STCCCODE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "HARMONIZEDSYSTEMCODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "HARMONIZEDSYSTEMCODE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "NMFCCODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "NMFCCODE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PARTITION",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PARTITION_COL",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SYNCSTARTDATETIME",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "SYNCSTARTTIMESTAMP",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "RECID",
+									"type": "Int64",
+									"physicalType": "bigint"
+								},
+								"sink": {
+									"name": "RECID",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "CREATED_DT"
+								},
+								"sink": {
+									"name": "CREATED_DT",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "CREATED_BY"
+								},
+								"sink": {
+									"name": "CREATED_BY",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SOURCE_SYSTEM_CD"
+								},
+								"sink": {
+									"name": "SOURCE_SYSTEM_CD",
+									"type": "Int32"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "AZURE_SQL_EcoResProductV2Staging",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "HANA_ODBC_STG_DYN_PRODUCT_V2",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "EIM_Pipelines"
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-09-30T06:40:07Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

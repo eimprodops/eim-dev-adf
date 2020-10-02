@@ -1,0 +1,32 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "AZURE_SQL_SalesInvoiceLineV2Staging",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"linkedService": {
+						"referenceName": "AzureBlobStorage_EIM_DEV_DataLake",
+						"type": "LinkedServiceReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "DerivedColumn1"
+				}
+			],
+			"script": "source(output(\n\t\tLINETOTALDISCOUNTAMOUNT as decimal(32,6),\n\t\tLINETOTALTAXAMOUNT as decimal(32,6),\n\t\tPRODUCTNAME as string,\n\t\tDEFINITIONGROUP as string,\n\t\tEXECUTIONID as string,\n\t\tISSELECTED as integer,\n\t\tTRANSFERSTATUS as integer,\n\t\tINVOICEDQUANTITY as decimal(32,6),\n\t\tSALESPRICE as decimal(32,6),\n\t\tPRODUCTDESCRIPTION as string,\n\t\tINVOICENUMBER as string,\n\t\tINVOICEDATE as timestamp,\n\t\tCURRENCYCODE as string,\n\t\tSALESUNITSYMBOL as string,\n\t\tCONFIRMEDSHIPPINGDATE as timestamp,\n\t\tPRODUCTNUMBER as string,\n\t\tLINECREATIONSEQUENCENUMBER as integer,\n\t\tLINETOTALCHARGEAMOUNT as decimal(32,6),\n\t\tLINEAMOUNT as decimal(32,6),\n\t\tINVENTORYSITEID as string,\n\t\tINVENTORYWAREHOUSEID as string,\n\t\tPRODUCTSIZEID as string,\n\t\tPRODUCTCOLORID as string,\n\t\tPRODUCTCONFIGURATIONID as string,\n\t\tPRODUCTSTYLEID as string,\n\t\tITEMBATCHNUMBER as string,\n\t\tORDEREDINVENTORYSTATUSID as string,\n\t\tDIMENSIONNUMBER as string,\n\t\tLEDGERVOUCHER as string,\n\t\tPARTITION as string,\n\t\tDATAAREAID as string,\n\t\tSYNCSTARTDATETIME as timestamp,\n\t\tRECID as long\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> source1\nsource1 derive(CREATED_DT = currentTimestamp(),\n\t\tCREATED_BY = 'ADF',\n\t\tSOURCE_SYSTEM_CD = 17) ~> DerivedColumn1\nDerivedColumn1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'delta',\n\tcontainer: 'staging-eim-dev-sqldw',\n\tfolderPath: 'SalesInvoiceLineV2Staging',\n\ttruncate: true,\n\tmergeSchema: false,\n\tvacuum: 0,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
+		}
+	}
+}

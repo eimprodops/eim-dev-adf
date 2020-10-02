@@ -1,0 +1,165 @@
+{
+	"name": "AZURE_SQL_ALM_PBI_InventDimStaging",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DYN_365_ALMNZUAT",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "AZURE_BYOD_SQL_DYNAMICS"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "DEFINITIONGROUP",
+				"type": "nvarchar"
+			},
+			{
+				"name": "EXECUTIONID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ISSELECTED",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TRANSFERSTATUS",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CONFIGID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "INVENTBATCHID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "INVENTCOLORID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "INVENTDIMID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "INVENTGTDID_RU",
+				"type": "nvarchar"
+			},
+			{
+				"name": "INVENTLOCATIONID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "INVENTOWNERID_RU",
+				"type": "nvarchar"
+			},
+			{
+				"name": "INVENTPROFILEID_RU",
+				"type": "nvarchar"
+			},
+			{
+				"name": "INVENTSERIALID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "INVENTSITEID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "INVENTSIZEID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "INVENTSTATUSID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "INVENTSTYLEID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LICENSEPLATEID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "WMSLOCATIONID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "WMSPALLETID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SHA1HASHHEX",
+				"type": "nvarchar"
+			},
+			{
+				"name": "INVENTDIMENSION1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "INVENTDIMENSION2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "INVENTDIMENSION3",
+				"type": "nvarchar"
+			},
+			{
+				"name": "INVENTDIMENSION4",
+				"type": "nvarchar"
+			},
+			{
+				"name": "INVENTDIMENSION5",
+				"type": "nvarchar"
+			},
+			{
+				"name": "INVENTDIMENSION6",
+				"type": "nvarchar"
+			},
+			{
+				"name": "INVENTDIMENSION7",
+				"type": "nvarchar"
+			},
+			{
+				"name": "INVENTDIMENSION8",
+				"type": "nvarchar"
+			},
+			{
+				"name": "INVENTDIMENSION9",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "INVENTDIMENSION10",
+				"type": "decimal",
+				"precision": 32,
+				"scale": 6
+			},
+			{
+				"name": "PARTITION",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DATAAREAID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SYNCSTARTDATETIME",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "ALM_PBI_InventDimStaging"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,32 @@
+{
+	"name": "Trig_DailytoEIMSQLDW_DIMS",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "EIMHanaPROD_Dim_Dates_AzureSQLDW_DEV",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2020-09-24T11:47:00Z",
+				"timeZone": "UTC",
+				"schedule": {
+					"minutes": [
+						50
+					],
+					"hours": [
+						11
+					]
+				}
+			}
+		}
+	}
+}

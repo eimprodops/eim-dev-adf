@@ -1,0 +1,24 @@
+{
+	"name": "Trigger_sws",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "ALMNZ_UAT_SalesCube_RetailCategory_HANA_QA",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Hour",
+				"interval": 24,
+				"startTime": "2020-06-10T21:25:00Z",
+				"timeZone": "UTC"
+			}
+		}
+	}
+}

@@ -1,0 +1,761 @@
+{
+	"name": "ALMNZ_BYOD_ReqItemCoverageSettingsV2_HANA",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy_ReqItemCoverageSettingsV2Staging",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "dbo.SalesInvoiceLineV2Staging"
+					},
+					{
+						"name": "Destination",
+						"value": "\"EIM_EDM\".\"STG_DYN_SALES_LINE_V2\""
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"additionalColumns": [
+							{
+								"name": "CREATED_DT",
+								"value": {
+									"value": "@convertFromUtc(utcnow(),'AUS Eastern Standard Time')",
+									"type": "Expression"
+								}
+							},
+							{
+								"name": "CREATED_BY",
+								"value": {
+									"value": "@pipeline().Pipeline",
+									"type": "Expression"
+								}
+							},
+							{
+								"name": "SOURCE_SYSTEM_CD",
+								"value": "16"
+							}
+						],
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "OdbcSink",
+						"writeBatchSize": 0,
+						"preCopyScript": "\nTRUNCATE TABLE EIM_EDM.STG_DYN_REQ_ITEM_COVERAGE_SETTINGS_V2;"
+					},
+					"enableStaging": true,
+					"stagingSettings": {
+						"linkedServiceName": {
+							"referenceName": "AzureBlobStorage_EIM_DEV_DataLake",
+							"type": "LinkedServiceReference"
+						},
+						"path": "staging-eim-dev-sqldw"
+					},
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "DEFINITIONGROUP",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "DEFINITIONGROUP",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "EXECUTIONID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "EXECUTIONID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ISSELECTED",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISSELECTED",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "TRANSFERSTATUS",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "TRANSFERSTATUS",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ITEMNUMBER",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ITEMNUMBER",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "COVERAGEITEMBATCHNUMBER",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "COVERAGEITEMBATCHNUMBER",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "COVERAGEPRODUCTCOLORID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "COVERAGEPRODUCTCOLORID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "COVERAGEPRODUCTSIZEID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "COVERAGEPRODUCTSIZEID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "COVERAGEPRODUCTSTYLEID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "COVERAGEPRODUCTSTYLEID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "COVERAGEPRODUCTVERSIONID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "COVERAGEPRODUCTVERSIONID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "COVERAGEWAREHOUSEID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "COVERAGEWAREHOUSEID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "COVERAGEITEMSERIALNUMBER",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "COVERAGEITEMSERIALNUMBER",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "COVERAGESITEID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "COVERAGESITEID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "COVERAGEINVENTORYSTATUSID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "COVERAGEINVENTORYSTATUSID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "COVERAGEWAREHOUSELOCATIONID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "COVERAGEWAREHOUSELOCATIONID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "COVERAGEPRODUCTCONFIGURATIONID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "COVERAGEPRODUCTCONFIGURATIONID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ISPLANNEDORDERTYPEOVERRIDDEN",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISPLANNEDORDERTYPEOVERRIDDEN",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "PLANNEDORDERTYPE",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "PLANNEDORDERTYPE",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "DEFAULTPLANNEDTRANSFERORDERFROMWAREHOUSEID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "DEFAULTPLANNEDTRANSFERORDERFROMWAREHOUSEID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "AREGENERALSETTINGSOVERRIDDEN",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "AREGENERALSETTINGSOVERRIDDEN",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCTCOVERAGEGROUPID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PRODUCTCOVERAGEGROUPID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "VENDORACCOUNTNUMBER",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "VENDORACCOUNTNUMBER",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ARECOVERAGEGROUPSETTINGSOVERRIDDEN",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ARECOVERAGEGROUPSETTINGSOVERRIDDEN",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "COVERAGEMETHOD",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "COVERAGEMETHOD",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "COVERAGEPERIODDAYS",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "COVERAGEPERIODDAYS",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "COVERAGETIMEFENCEDAYS",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "COVERAGETIMEFENCEDAYS",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "POSITIVEDAYS",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "POSITIVEDAYS",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "NEGATIVEDAYS",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "NEGATIVEDAYS",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ARETIMEFENCESOVERRIDDEN",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ARETIMEFENCESOVERRIDDEN",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "AUTOMATICFIRMINGTIMEFENCEDAYS",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "AUTOMATICFIRMINGTIMEFENCEDAYS",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "FREEZETIMEFENCEDAYS",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "FREEZETIMEFENCEDAYS",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "BOMORFORMULAEXPLOSIONTIMEFENCEDAYS",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "BOMORFORMULAEXPLOSIONTIMEFENCEDAYS",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "CAPACITYSCHEDULINGTIMEFENCEDAYS",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "CAPACITYSCHEDULINGTIMEFENCEDAYS",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "APPROVEDREQUISITIONTIMEFENCEDAYS",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "APPROVEDREQUISITIONTIMEFENCEDAYS",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "MINIMUMONHANDINVENTORYQUANTITY",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "MINIMUMONHANDINVENTORYQUANTITY",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "MAXIMUMONHANDINVENTORYQUANTITY",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "MAXIMUMONHANDINVENTORYQUANTITY",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "MINIMUMONHANDINVENTORYSAFETYKEYID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "MINIMUMONHANDINVENTORYSAFETYKEYID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "MAXIMUMONHANDINVENTORYSAFETYKEYID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "MAXIMUMONHANDINVENTORYSAFETYKEYID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "MINIMUMONHANDFULFILLMENTMETHOD",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "MINIMUMONHANDFULFILLMENTMETHOD",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ISMINIMUMONHANDSAFETYPERIODUSED",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISMINIMUMONHANDSAFETYPERIODUSED",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "PLANNINGFORMULAITEMNUMBER",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PLANNINGFORMULAITEMNUMBER",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DEFAULTPLANNINGFORMULAPRIORITY",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "DEFAULTPLANNINGFORMULAPRIORITY",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "CURRENTPLANNINGFORMULAPRIORITY",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "CURRENTPLANNINGFORMULAPRIORITY",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "LASTPLANNINGFORMULAPRIORITYCHANGEDDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "LASTPLANNINGFORMULAPRIORITYCHANGEDDATE",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "ISCONSUMEONHANDOVERRIDDEN",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISCONSUMEONHANDOVERRIDDEN",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "CONSUMEONHANDINVENTORYMETHOD",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "CONSUMEONHANDINVENTORYMETHOD",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ISPROCUREMENTLEADTIMEOVERRIDDEN",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISPROCUREMENTLEADTIMEOVERRIDDEN",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "PROCUREMENTLEADTIMEDAYS",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "PROCUREMENTLEADTIMEDAYS",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ISPROCUMENTLEADTIMEUSINGWORKINGDAYS",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISPROCUMENTLEADTIMEUSINGWORKINGDAYS",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ISPRODUCTIONLEADTIMEOVERRIDDEN",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISPRODUCTIONLEADTIMEOVERRIDDEN",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCTIONLEADTIMEDAYS",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "PRODUCTIONLEADTIMEDAYS",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ISPRODUCTIONLEADTIMEUSINGWORKINGDAYS",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISPRODUCTIONLEADTIMEUSINGWORKINGDAYS",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ISTRANSFERLEADTIMEOVERRIDDEN",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISTRANSFERLEADTIMEOVERRIDDEN",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "TRANSFERLEADTIMEDAYS",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "TRANSFERLEADTIMEDAYS",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ISTRANSFERLEADTIMEUSINGWORKINGDAYS",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ISTRANSFERLEADTIMEUSINGWORKINGDAYS",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "PARTITION",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "PARTITION_COL",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DATAAREAID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "DATAAREAID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SYNCSTARTDATETIME",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "SYNCSTARTDATETIME",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "CREATED_DT"
+								},
+								"sink": {
+									"name": "CREATED_DT",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "CREATED_BY"
+								},
+								"sink": {
+									"name": "CREATED_BY",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SOURCE_SYSTEM_CD"
+								},
+								"sink": {
+									"name": "SOURCE_SYSTEM_CD",
+									"type": "Int32"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "AZURE_SQL_ReqItemCoverageSettingsV2Staging",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "HANA_ODBC_STG_DYN_REQ_ITEM_COVERAGE_SETTINGS_V2",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "EIM_Pipelines"
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-09-30T06:40:07Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,17 @@
+{
+	"name": "EIM_QA_SapHana",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "EIM SAP Hana Connection (HNQ)",
+		"annotations": [],
+		"type": "SapHana",
+		"typeProperties": {
+			"connectionString": "servernode=172.17.130.1;uid=AZURE",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJlMzhmZDAyMi0zMjJkLTQxOTAtOTcxYy1jNTJjNzQ3NWZlNzIiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "EIMDEVintegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

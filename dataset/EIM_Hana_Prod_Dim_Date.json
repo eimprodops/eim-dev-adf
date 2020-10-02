@@ -1,0 +1,20 @@
+{
+	"name": "EIM_Hana_Prod_Dim_Date",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "EIM_PROD_SapHana",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SAPHana_EIM_PROD"
+		},
+		"annotations": [],
+		"type": "SapHanaTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "EIM_EDM",
+			"table": "DIM_DATE"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

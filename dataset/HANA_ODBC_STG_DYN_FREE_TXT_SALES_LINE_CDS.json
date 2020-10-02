@@ -1,0 +1,19 @@
+{
+	"name": "HANA_ODBC_STG_DYN_FREE_TXT_SALES_LINE_CDS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "EIM_HANA_HNQ_test",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "HANA_ODBC"
+		},
+		"annotations": [],
+		"type": "OdbcTable",
+		"schema": [],
+		"typeProperties": {
+			"tableName": "\"EIM_EDM\".\"STG_DYN_FREE_TXT_SALES_LINE_CDS\""
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,99 @@
+{
+	"name": "AZURE_SQL_EcoResProductUnitOfMeasureConversionStaging",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DYN_365_ALMNZUAT",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "AZURE_BYOD_SQL_DYNAMICS"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "DEFINITIONGROUP",
+				"type": "nvarchar"
+			},
+			{
+				"name": "EXECUTIONID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ISSELECTED",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TRANSFERSTATUS",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "DENOMINATOR",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "FACTOR",
+				"type": "decimal",
+				"precision": 32,
+				"scale": 16
+			},
+			{
+				"name": "INNEROFFSET",
+				"type": "decimal",
+				"precision": 32,
+				"scale": 6
+			},
+			{
+				"name": "NUMERATOR",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "OUTEROFFSET",
+				"type": "decimal",
+				"precision": 32,
+				"scale": 6
+			},
+			{
+				"name": "ROUNDING",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "FROMUNITSYMBOL",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TOUNITSYMBOL",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PRODUCTNUMBER",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PARTITION",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SYNCSTARTDATETIME",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "RECID",
+				"type": "bigint",
+				"precision": 19
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "EcoResProductUnitOfMeasureConversionStaging"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

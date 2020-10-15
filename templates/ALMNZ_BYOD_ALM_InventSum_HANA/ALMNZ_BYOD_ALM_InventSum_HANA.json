@@ -1,0 +1,995 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name"
+		},
+		"AzureBlobStorage_EIM_DEV_DataLake": {
+			"type": "string"
+		},
+		"DYN_365_ALMNZUAT": {
+			"type": "string"
+		},
+		"EIM_HANA_HNQ_test": {
+			"type": "string"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/ALMNZ_BYOD_ALM_InventSum_HANA')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy_ALM_InventSumStaging",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "dbo.ALM_InventSumStaging"
+							},
+							{
+								"name": "Destination",
+								"value": "\"EIM_EDM\".\"STG_DYN_ALM_INVENT_SUM\""
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"additionalColumns": [
+									{
+										"name": "CREATED_DT",
+										"value": {
+											"value": "@convertFromUtc(utcnow(),'AUS Eastern Standard Time')",
+											"type": "Expression"
+										}
+									},
+									{
+										"name": "CREATED_BY",
+										"value": {
+											"value": "@pipeline().Pipeline",
+											"type": "Expression"
+										}
+									},
+									{
+										"name": "SOURCE_SYSTEM_CD",
+										"value": "16"
+									}
+								],
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "OdbcSink",
+								"writeBatchSize": 0,
+								"preCopyScript": "TRUNCATE TABLE EIM_EDM.STG_DYN_ALM_INVENT_SUM;"
+							},
+							"enableStaging": true,
+							"stagingSettings": {
+								"linkedServiceName": {
+									"referenceName": "[parameters('AzureBlobStorage_EIM_DEV_DataLake')]",
+									"type": "LinkedServiceReference"
+								},
+								"path": "staging-eim-dev-sqldw"
+							},
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "DEFINITIONGROUP",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "DEFINITIONGROUP",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "EXECUTIONID",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "EXECUTIONID",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ISSELECTED",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "ISSELECTED",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "TRANSFERSTATUS",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "TRANSFERSTATUS",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ARRIVED",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "ARRIVED",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "AVAILORDERED",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "AVAILORDERED",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "AVAILPHYSICAL",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "AVAILPHYSICAL",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "CLOSED",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "CLOSED",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "CLOSEDQTY",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "CLOSEDQTY",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "DEDUCTED",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "DEDUCTED",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "INVENTDIMID",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "INVENTDIMID",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ITEMID",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ITEMID",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "LASTUPDDATEEXPECTED",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										},
+										"sink": {
+											"name": "LASTUPDDATEEXPECTED",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "LASTUPDDATEPHYSICAL",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										},
+										"sink": {
+											"name": "LASTUPDDATEPHYSICAL",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "ONORDER",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "ONORDER",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ORDERED",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "ORDERED",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "PDSCWARRIVED",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "PDSCWARRIVED",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "PDSCWAVAILORDERED",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "PDSCWAVAILORDERED",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "PDSCWAVAILPHYSICAL",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "PDSCWAVAILPHYSICAL",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "PDSCWDEDUCTED",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "PDSCWDEDUCTED",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "PDSCWONORDER",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "PDSCWONORDER",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "PDSCWORDERED",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "PDSCWORDERED",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "PDSCWPHYSICALINVENT",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "PDSCWPHYSICALINVENT",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "PDSCWPICKED",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "PDSCWPICKED",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "PDSCWPOSTEDQTY",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "PDSCWPOSTEDQTY",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "PDSCWQUOTATIONISSUE",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "PDSCWQUOTATIONISSUE",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "PDSCWQUOTATIONRECEIPT",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "PDSCWQUOTATIONRECEIPT",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "PDSCWRECEIVED",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "PDSCWRECEIVED",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "PDSCWREGISTERED",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "PDSCWREGISTERED",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "PDSCWRESERVORDERED",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "PDSCWRESERVORDERED",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "PDSCWRESERVPHYSICAL",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "PDSCWRESERVPHYSICAL",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "PHYSICALINVENT",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "PHYSICALINVENT",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "PHYSICALVALUE",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "PHYSICALVALUE",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "PHYSICALVALUESECCUR_RU",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "PHYSICALVALUESECCUR_RU",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "PICKED",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "PICKED",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "POSTEDQTY",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "POSTEDQTY",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "POSTEDVALUE",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "POSTEDVALUE",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "POSTEDVALUESECCUR_RU",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "POSTEDVALUESECCUR_RU",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "QUOTATIONISSUE",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "QUOTATIONISSUE",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "QUOTATIONRECEIPT",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "QUOTATIONRECEIPT",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "RECEIVED",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "RECEIVED",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "REGISTERED",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "REGISTERED",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "RESERVORDERED",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "RESERVORDERED",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "RESERVPHYSICAL",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "RESERVPHYSICAL",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ISEXCLUDEDFROMINVENTORYVALUE",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "ISEXCLUDEDFROMINVENTORYVALUE",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "PARTITION",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "PARTITION_COL",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "DATAAREAID",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "DATAAREAID",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "SYNCSTARTDATETIME",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										},
+										"sink": {
+											"name": "SYNCSTARTTIMESTAMP",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "CREATED_DT"
+										},
+										"sink": {
+											"name": "CREATED_DT",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "CREATED_BY"
+										},
+										"sink": {
+											"name": "CREATED_BY",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "SOURCE_SYSTEM_CD"
+										},
+										"sink": {
+											"name": "SOURCE_SYSTEM_CD",
+											"type": "Int32"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "AZURE_SQL_ALM_InventSumStaging",
+								"type": "DatasetReference"
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "HANA_ODBC_STG_DYN_ALM_INVENT_SUM",
+								"type": "DatasetReference"
+							}
+						]
+					}
+				],
+				"folder": {
+					"name": "EIM_Pipelines"
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-09-30T06:40:07Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/AZURE_SQL_ALM_InventSumStaging')]",
+				"[concat(variables('factoryId'), '/datasets/HANA_ODBC_STG_DYN_ALM_INVENT_SUM')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AZURE_SQL_ALM_InventSumStaging')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "[parameters('DYN_365_ALMNZUAT')]",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AZURE_BYOD_SQL_DYNAMICS"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "DEFINITIONGROUP",
+						"type": "nvarchar"
+					},
+					{
+						"name": "EXECUTIONID",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ISSELECTED",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "TRANSFERSTATUS",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ARRIVED",
+						"type": "decimal",
+						"precision": 32,
+						"scale": 6
+					},
+					{
+						"name": "AVAILORDERED",
+						"type": "decimal",
+						"precision": 32,
+						"scale": 6
+					},
+					{
+						"name": "AVAILPHYSICAL",
+						"type": "decimal",
+						"precision": 32,
+						"scale": 6
+					},
+					{
+						"name": "CLOSED",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CLOSEDQTY",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DEDUCTED",
+						"type": "decimal",
+						"precision": 32,
+						"scale": 6
+					},
+					{
+						"name": "INVENTDIMID",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ITEMID",
+						"type": "nvarchar"
+					},
+					{
+						"name": "LASTUPDDATEEXPECTED",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "LASTUPDDATEPHYSICAL",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "ONORDER",
+						"type": "decimal",
+						"precision": 32,
+						"scale": 6
+					},
+					{
+						"name": "ORDERED",
+						"type": "decimal",
+						"precision": 32,
+						"scale": 6
+					},
+					{
+						"name": "PDSCWARRIVED",
+						"type": "decimal",
+						"precision": 32,
+						"scale": 6
+					},
+					{
+						"name": "PDSCWAVAILORDERED",
+						"type": "decimal",
+						"precision": 32,
+						"scale": 6
+					},
+					{
+						"name": "PDSCWAVAILPHYSICAL",
+						"type": "decimal",
+						"precision": 32,
+						"scale": 6
+					},
+					{
+						"name": "PDSCWDEDUCTED",
+						"type": "decimal",
+						"precision": 32,
+						"scale": 6
+					},
+					{
+						"name": "PDSCWONORDER",
+						"type": "decimal",
+						"precision": 32,
+						"scale": 6
+					},
+					{
+						"name": "PDSCWORDERED",
+						"type": "decimal",
+						"precision": 32,
+						"scale": 6
+					},
+					{
+						"name": "PDSCWPHYSICALINVENT",
+						"type": "decimal",
+						"precision": 32,
+						"scale": 6
+					},
+					{
+						"name": "PDSCWPICKED",
+						"type": "decimal",
+						"precision": 32,
+						"scale": 6
+					},
+					{
+						"name": "PDSCWPOSTEDQTY",
+						"type": "decimal",
+						"precision": 32,
+						"scale": 6
+					},
+					{
+						"name": "PDSCWQUOTATIONISSUE",
+						"type": "decimal",
+						"precision": 32,
+						"scale": 6
+					},
+					{
+						"name": "PDSCWQUOTATIONRECEIPT",
+						"type": "decimal",
+						"precision": 32,
+						"scale": 6
+					},
+					{
+						"name": "PDSCWRECEIVED",
+						"type": "decimal",
+						"precision": 32,
+						"scale": 6
+					},
+					{
+						"name": "PDSCWREGISTERED",
+						"type": "decimal",
+						"precision": 32,
+						"scale": 6
+					},
+					{
+						"name": "PDSCWRESERVORDERED",
+						"type": "decimal",
+						"precision": 32,
+						"scale": 6
+					},
+					{
+						"name": "PDSCWRESERVPHYSICAL",
+						"type": "decimal",
+						"precision": 32,
+						"scale": 6
+					},
+					{
+						"name": "PHYSICALINVENT",
+						"type": "decimal",
+						"precision": 32,
+						"scale": 6
+					},
+					{
+						"name": "PHYSICALVALUE",
+						"type": "decimal",
+						"precision": 32,
+						"scale": 6
+					},
+					{
+						"name": "PHYSICALVALUESECCUR_RU",
+						"type": "decimal",
+						"precision": 32,
+						"scale": 6
+					},
+					{
+						"name": "PICKED",
+						"type": "decimal",
+						"precision": 32,
+						"scale": 6
+					},
+					{
+						"name": "POSTEDQTY",
+						"type": "decimal",
+						"precision": 32,
+						"scale": 6
+					},
+					{
+						"name": "POSTEDVALUE",
+						"type": "decimal",
+						"precision": 32,
+						"scale": 6
+					},
+					{
+						"name": "POSTEDVALUESECCUR_RU",
+						"type": "decimal",
+						"precision": 32,
+						"scale": 6
+					},
+					{
+						"name": "QUOTATIONISSUE",
+						"type": "decimal",
+						"precision": 32,
+						"scale": 6
+					},
+					{
+						"name": "QUOTATIONRECEIPT",
+						"type": "decimal",
+						"precision": 32,
+						"scale": 6
+					},
+					{
+						"name": "RECEIVED",
+						"type": "decimal",
+						"precision": 32,
+						"scale": 6
+					},
+					{
+						"name": "REGISTERED",
+						"type": "decimal",
+						"precision": 32,
+						"scale": 6
+					},
+					{
+						"name": "RESERVORDERED",
+						"type": "decimal",
+						"precision": 32,
+						"scale": 6
+					},
+					{
+						"name": "RESERVPHYSICAL",
+						"type": "decimal",
+						"precision": 32,
+						"scale": 6
+					},
+					{
+						"name": "ISEXCLUDEDFROMINVENTORYVALUE",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "PARTITION",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DATAAREAID",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SYNCSTARTDATETIME",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "ALM_InventSumStaging"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/HANA_ODBC_STG_DYN_ALM_INVENT_SUM')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "[parameters('EIM_HANA_HNQ_test')]",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "HANA_ODBC"
+				},
+				"annotations": [],
+				"type": "OdbcTable",
+				"schema": [],
+				"typeProperties": {
+					"tableName": "\"EIM_EDM\".\"STG_DYN_ALM_INVENT_SUM\""
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
